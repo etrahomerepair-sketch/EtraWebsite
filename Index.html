@@ -638,6 +638,76 @@ button { font-family: inherit; cursor: pointer; }
 .reviews-badge-text strong { color: var(--white); }
 
 /* ─────────────────────────────────────────
+   BEFORE / AFTER GALLERY
+───────────────────────────────────────── */
+#gallery { background: var(--char); padding: 110px 56px; }
+
+.gallery-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; margin-top: 56px;
+}
+.ba-card {
+  position: relative; overflow: hidden; cursor: pointer;
+  border: 1px solid var(--steel); background: var(--char2);
+}
+.ba-card:hover { border-color: rgba(200,169,110,.3); }
+
+.ba-slider {
+  position: relative; width: 100%; aspect-ratio: 4/3;
+  overflow: hidden;
+}
+.ba-img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; transition: opacity .4s;
+}
+.ba-img.after { opacity: 0; }
+.ba-card:hover .ba-img.after { opacity: 1; }
+.ba-card:hover .ba-img.before { opacity: 0; }
+
+.ba-labels {
+  position: absolute; top: 10px; left: 10px; right: 10px;
+  display: flex; justify-content: space-between; pointer-events: none;
+}
+.ba-label {
+  font-size: 8px; font-weight: 700; letter-spacing: .28em;
+  text-transform: uppercase; padding: 4px 10px;
+  background: rgba(0,0,0,.7); color: var(--mist);
+  backdrop-filter: blur(8px);
+}
+.ba-label.gold { background: rgba(200,169,110,.9); color: var(--black); }
+
+.ba-info { padding: 16px 18px; }
+.ba-title { font-family: 'Bebas Neue', Impact, sans-serif; font-size: 17px; color: var(--white); letter-spacing: .06em; margin-bottom: 4px; }
+.ba-loc { font-size: 11px; color: var(--slate); letter-spacing: .08em; }
+.ba-type { font-size: 9px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; color: var(--gold); margin-top: 8px; }
+
+@media (max-width: 900px) { .gallery-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .gallery-grid { grid-template-columns: 1fr; } }
+
+/* ─────────────────────────────────────────
+   URGENCY BANNER
+───────────────────────────────────────── */
+.urgency-banner {
+  background: linear-gradient(135deg, #1A1A1A 0%, #2A1A0A 100%);
+  border-top: 1px solid rgba(200,169,110,.2);
+  border-bottom: 1px solid rgba(200,169,110,.2);
+  padding: 28px 56px;
+  display: flex; align-items: center; justify-content: center; gap: 20px;
+  flex-wrap: wrap; text-align: center;
+}
+.urgency-icon { font-size: 24px; }
+.urgency-text { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(18px, 2.5vw, 26px); color: var(--white); letter-spacing: .05em; }
+.urgency-text span { color: var(--gold); }
+.urgency-cta {
+  background: var(--gold); color: var(--black);
+  font-family: 'Barlow', sans-serif; font-weight: 700;
+  font-size: 11px; letter-spacing: .22em; text-transform: uppercase;
+  padding: 11px 24px; border: none; cursor: pointer;
+  transition: background .2s;
+}
+.urgency-cta:hover { background: var(--gold-lt); }
+
+/* ─────────────────────────────────────────
    FOOTER
 ───────────────────────────────────────── */
 footer { background: var(--char); border-top: 1px solid var(--steel); }
@@ -722,6 +792,7 @@ footer { background: var(--char); border-top: 1px solid var(--steel); }
   <a href="#about"         onclick="closeMobile()">About</a>
   <a href="#services"      onclick="closeMobile()">Services</a>
   <a href="#stairs"        onclick="closeMobile()">Staircases</a>
+  <a href="#gallery"       onclick="closeMobile()">Gallery</a>
   <a href="#shop"          onclick="closeMobile()">Shop</a>
   <a href="#areas"         onclick="closeMobile()">Areas</a>
   <a href="#contact"       onclick="closeMobile()">Contact</a>
@@ -748,6 +819,7 @@ footer { background: var(--char); border-top: 1px solid var(--steel); }
     <a href="#about">About</a>
     <a href="#services">Services</a>
     <a href="#stairs">Staircases</a>
+    <a href="#gallery">Gallery</a>
     <a href="#shop">Shop</a>
     <a href="#areas">Areas</a>
   </div>
@@ -1053,6 +1125,75 @@ footer { background: var(--char); border-top: 1px solid var(--steel); }
       </div>
       <a href="#contact" class="btn-gold">Book a Staircase Consult &nbsp;→</a>
     </div>
+  </div>
+</section>
+
+<!-- ══════ URGENCY BANNER ══════ -->
+<div class="urgency-banner">
+  <span class="urgency-icon">⚡</span>
+  <span class="urgency-text">Summer & Fall Slots Filling Fast — <span>Book Your Free Quote Now</span></span>
+  <a href="#contact" class="urgency-cta">Get a Quote →</a>
+</div>
+
+<!-- ══════ BEFORE / AFTER GALLERY ══════ -->
+<section id="gallery">
+  <div class="eyebrow"><span class="eyebrow-line"></span><span class="eyebrow-text">Our Work</span></div>
+  <h2 class="section-title">REAL<br>TRANSFORMATIONS.</h2>
+  <div class="gold-rule"></div>
+  <p style="font-size:14.5px;color:var(--ash);max-width:520px;line-height:1.9;margin-bottom:10px;">Hover or tap to see the after. Every project is real work by the ETRA team in Halifax and HRM.</p>
+
+  <div class="gallery-grid">
+    <!-- Card 1 -->
+    <div class="ba-card">
+      <div class="ba-slider">
+        <img src="images/IMG_9466.webp" alt="Staircase before renovation" class="ba-img before">
+        <img src="images/IMG_9465.webp" alt="Staircase after renovation" class="ba-img after">
+        <div class="ba-labels">
+          <span class="ba-label">Before</span>
+          <span class="ba-label gold">After</span>
+        </div>
+      </div>
+      <div class="ba-info">
+        <div class="ba-title">Custom Vinyl Staircase</div>
+        <div class="ba-loc">Bedford, NS</div>
+        <div class="ba-type">Staircase Transformation</div>
+      </div>
+    </div>
+    <!-- Card 2 -->
+    <div class="ba-card">
+      <div class="ba-slider">
+        <img src="images/IMG_9467.webp" alt="Drywall before" class="ba-img before">
+        <img src="images/IMG_9470.webp" alt="Drywall after" class="ba-img after">
+        <div class="ba-labels">
+          <span class="ba-label">Before</span>
+          <span class="ba-label gold">After</span>
+        </div>
+      </div>
+      <div class="ba-info">
+        <div class="ba-title">Full Drywall Install</div>
+        <div class="ba-loc">Dartmouth, NS</div>
+        <div class="ba-type">Drywall & Finish</div>
+      </div>
+    </div>
+    <!-- Card 3 -->
+    <div class="ba-card">
+      <div class="ba-slider">
+        <img src="images/IMG_9465.webp" alt="Flooring before" class="ba-img before">
+        <img src="images/IMG_9466.webp" alt="Flooring after" class="ba-img after">
+        <div class="ba-labels">
+          <span class="ba-label">Before</span>
+          <span class="ba-label gold">After</span>
+        </div>
+      </div>
+      <div class="ba-info">
+        <div class="ba-title">LVP Flooring Install</div>
+        <div class="ba-loc">Halifax, NS</div>
+        <div class="ba-type">Flooring</div>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:36px;">
+    <a href="#contact" class="btn-gold">Start Your Transformation →</a>
   </div>
 </section>
 
@@ -1470,6 +1611,24 @@ document.getElementById('formSubmit').addEventListener('click', async function()
     if (r.ok) {
       btn.textContent = '✓  Quote Request Sent! We\\'ll be in touch within 24 hours.';
       btn.style.background = '#2A5C3A'; btn.style.color = '#A8DDB8';
+      // Post to Agent Board so agents pick up the lead
+      try {
+        await fetch(`${SB_URL}/rest/v1/agent_board`, {
+          method: 'POST',
+          headers: { 'apikey': SB_ANON, 'Authorization': `Bearer ${SB_ANON}`, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+          body: JSON.stringify({
+            id: 'ab_' + crypto.randomUUID(),
+            agent: 'lead-gen',
+            category: 'lead',
+            priority: 'high',
+            title: `New lead: ${fname} ${lname}`,
+            body: `Service: ${service || 'Not specified'}\nLocation: ${location || 'Not specified'}\nPhone: ${phone}\nEmail: ${email}\nMessage: ${message || 'No message'}`,
+            status: 'open',
+            needs_answer: true,
+            created_at: new Date().toISOString(),
+          }),
+        });
+      } catch(e) { /* silent — form already submitted */ }
       // Reset form
       document.getElementById('fname').value = '';
       document.getElementById('lname').value = '';
