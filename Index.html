@@ -587,6 +587,57 @@ button { font-family: inherit; cursor: pointer; }
 .form-note { font-size: 11px; color: var(--slate); margin-top: 10px; text-align: center; letter-spacing: .06em; }
 
 /* ─────────────────────────────────────────
+   FLOATING CTA
+───────────────────────────────────────── */
+.floating-cta {
+  position: fixed; bottom: 20px; right: 20px; z-index: 150;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.floating-cta a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 22px; border-radius: 999px;
+  font-family: 'Barlow', sans-serif; font-weight: 700;
+  font-size: 12px; letter-spacing: .18em; text-transform: uppercase;
+  box-shadow: 0 8px 24px rgba(0,0,0,.4);
+  transition: transform .2s, box-shadow .2s;
+}
+.floating-cta a:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,.5); }
+.floating-cta .cta-call { background: var(--gold); color: var(--black); }
+.floating-cta .cta-quote { background: var(--char2); border: 1px solid var(--gold); color: var(--gold); }
+@media (max-width: 768px) {
+  .floating-cta { bottom: 16px; right: 16px; }
+  .floating-cta a { padding: 12px 18px; font-size: 11px; }
+  .floating-cta .cta-quote { display: none; }
+}
+
+/* ─────────────────────────────────────────
+   TRUST BAR
+───────────────────────────────────────── */
+.trust-bar {
+  display: flex; align-items: center; justify-content: center; gap: 32px;
+  padding: 14px 20px; background: var(--char); border-bottom: 1px solid var(--steel);
+  flex-wrap: wrap;
+}
+.trust-item {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 600; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--ash);
+}
+.trust-item .trust-icon { color: var(--gold); font-size: 14px; }
+
+/* ─────────────────────────────────────────
+   REVIEWS WIDGET
+───────────────────────────────────────── */
+.reviews-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(200,169,110,.08); border: 1px solid rgba(200,169,110,.2);
+  padding: 10px 18px; margin-bottom: 28px;
+}
+.reviews-badge-stars { color: var(--gold); font-size: 14px; letter-spacing: 2px; }
+.reviews-badge-text { font-size: 12px; color: var(--mist); font-weight: 500; }
+.reviews-badge-text strong { color: var(--white); }
+
+/* ─────────────────────────────────────────
    FOOTER
 ───────────────────────────────────────── */
 footer { background: var(--char); border-top: 1px solid var(--steel); }
@@ -706,6 +757,15 @@ footer { background: var(--char); border-top: 1px solid var(--steel); }
     <span></span><span></span><span></span>
   </button>
 </nav>
+
+<!-- ══════ TRUST BAR ══════ -->
+<div class="trust-bar">
+  <div class="trust-item"><span class="trust-icon">✓</span> Licensed & Insured</div>
+  <div class="trust-item"><span class="trust-icon">✓</span> Free Estimates</div>
+  <div class="trust-item"><span class="trust-icon">★</span> 5.0 Google Rating</div>
+  <div class="trust-item"><span class="trust-icon">✓</span> WCB Compliant</div>
+  <div class="trust-item"><span class="trust-icon">✓</span> Serving HRM Since 2014</div>
+</div>
 
 <!-- ══════ HERO ══════ -->
 <section id="hero">
@@ -1033,8 +1093,12 @@ footer { background: var(--char); border-top: 1px solid var(--steel); }
     <div>
       <div class="eyebrow"><span class="eyebrow-line"></span><span class="eyebrow-text">Client Reviews</span></div>
       <h2 class="section-title">WHAT CLIENTS<br>ARE SAYING.</h2>
+      <div class="reviews-badge">
+        <span class="reviews-badge-stars">★★★★★</span>
+        <span class="reviews-badge-text"><strong>5.0</strong> on Google · 50+ reviews</span>
+      </div>
     </div>
-    <a href="#contact" class="btn-ghost">Leave a Review →</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=ETRA+Pro+Services+Halifax" target="_blank" class="btn-ghost">Read All Reviews on Google →</a>
   </div>
   <div class="testi-grid">
     <div class="testi-card">
@@ -1304,7 +1368,7 @@ footer { background: var(--char); border-top: 1px solid var(--steel); }
   </div>
 
   <div class="footer-bar">
-    <p class="footer-bar-copy">© 2025 <strong>ETRA Pro Services</strong> · <strong>etra.ca</strong> · Halifax, NS. All rights reserved.</p>
+    <p class="footer-bar-copy">© 2026 <strong>ETRA Pro Services</strong> · <strong>etra.ca</strong> · Halifax, NS. All rights reserved.</p>
     <div class="footer-bar-links">
       <a href="#">Privacy</a>
       <a href="#">Terms</a>
@@ -1312,6 +1376,12 @@ footer { background: var(--char); border-top: 1px solid var(--steel); }
     </div>
   </div>
 </footer>
+
+<!-- ══════ FLOATING CTA ══════ -->
+<div class="floating-cta">
+  <a href="tel:7824461992" class="cta-call">📞 (782) 446-1992</a>
+  <a href="#contact" class="cta-quote">Free Quote →</a>
+</div>
 
 <!-- ══════ SCRIPTS ══════ -->
 <script>
@@ -1354,16 +1424,71 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 });
 
 // ── FORM SUBMIT ──
-document.getElementById('formSubmit').addEventListener('click', function() {
+document.getElementById('formSubmit').addEventListener('click', async function() {
   const btn = this;
-  btn.textContent = '✓  Request Sent! We\'ll be in touch soon.';
-  btn.style.background = '#2A5C3A';
-  btn.style.color = '#A8DDB8';
-  setTimeout(() => {
-    btn.textContent = 'Send My Quote Request →';
-    btn.style.background = '';
-    btn.style.color = '';
-  }, 4500);
+  const fname = document.getElementById('fname').value.trim();
+  const lname = document.getElementById('lname').value.trim();
+  const phone = document.getElementById('fphone').value.trim();
+  const email = document.getElementById('femail').value.trim();
+  const service = document.getElementById('fservice').value;
+  const location = document.getElementById('flocation').value.trim();
+  const message = document.getElementById('fmessage').value.trim();
+
+  if (!fname || !phone) {
+    btn.textContent = '⚠ Please enter your name and phone number';
+    btn.style.background = '#8B3A3A';
+    btn.style.color = '#FBB';
+    setTimeout(() => { btn.textContent = 'Send My Quote Request →'; btn.style.background = ''; btn.style.color = ''; }, 3000);
+    return;
+  }
+
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+  btn.style.opacity = '0.6';
+
+  const SB_URL = 'https://qgydijfjkntkgpnuylev.supabase.co';
+  const SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFneWRpamZqa250a2dwbnV5bGV2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxNDc1NDYsImV4cCI6MjA4NzcyMzU0Nn0.Ell8giAbiYCAh6JfdfZ8plCbQZRhMzqHoY-SyTaM3yM';
+
+  const payload = {
+    id: crypto.randomUUID(),
+    date: new Date().toISOString().slice(0,10),
+    name: `${fname} ${lname}`.trim(),
+    phone: phone,
+    email: email,
+    location: location,
+    service: service || null,
+    message: message || null,
+    status: 'new',
+  };
+
+  try {
+    const r = await fetch(`${SB_URL}/rest/v1/requests`, {
+      method: 'POST',
+      headers: { 'apikey': SB_ANON, 'Authorization': `Bearer ${SB_ANON}`, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+      body: JSON.stringify(payload),
+    });
+    if (r.ok) {
+      btn.textContent = '✓  Quote Request Sent! We\\'ll be in touch within 24 hours.';
+      btn.style.background = '#2A5C3A'; btn.style.color = '#A8DDB8';
+      // Reset form
+      document.getElementById('fname').value = '';
+      document.getElementById('lname').value = '';
+      document.getElementById('fphone').value = '';
+      document.getElementById('femail').value = '';
+      document.getElementById('fservice').selectedIndex = 0;
+      document.getElementById('flocation').value = '';
+      document.getElementById('fmessage').value = '';
+      // Track conversion
+      if (typeof gtag === 'function') gtag('event', 'generate_lead', { 'event_category': 'form', 'event_label': service || 'general' });
+      setTimeout(() => { btn.textContent = 'Send My Quote Request →'; btn.style.background = ''; btn.style.color = ''; btn.disabled = false; btn.style.opacity = ''; }, 6000);
+    } else {
+      throw new Error('API error');
+    }
+  } catch (e) {
+    btn.textContent = '⚠ Could not send — please call (782) 446-1992';
+    btn.style.background = '#8B3A3A'; btn.style.color = '#FBB';
+    setTimeout(() => { btn.textContent = 'Send My Quote Request →'; btn.style.background = ''; btn.style.color = ''; btn.disabled = false; btn.style.opacity = ''; }, 5000);
+  }
 });
 </script>
 </body>
